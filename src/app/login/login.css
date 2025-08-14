@@ -1,13 +1,15 @@
 .login-container {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  background-image: url('https://static.india.gov.in/npiprod/odop/uploads/cotton_bales_312948114a.jpg');
+  background-image: url('https://cdn.britannica.com/72/270772-050-9B03FF80/Cotton-plants-in-a-field.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding: 20px;
+  background-attachment: fixed;
+  padding: 0;
+  overflow: hidden;
 }
 
 .login-container::before {
@@ -22,12 +24,12 @@
 }
 
 .login-card {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 50px 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   width: 100%;
   max-width: 400px;
   position: relative;
@@ -87,24 +89,23 @@
 }
 
 .form-group input {
-  padding: 12px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  color: #2c3e50;
+  padding: 15px 20px;
+  border: 2px solid #e1e5e9;
+  border-radius: 12px;
+  background: white;
+  color: #333;
   font-size: 1rem;
   transition: all 0.3s ease;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .form-group input::placeholder {
-  color: #95a5a6;
+  color: #999;
 }
 
 .login-btn {

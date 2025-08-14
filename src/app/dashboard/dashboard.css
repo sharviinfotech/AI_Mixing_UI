@@ -16,6 +16,10 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
 }
 
 .sidebar-closed {
@@ -233,11 +237,12 @@
   padding: 20px;
   transition: all 0.3s ease;
   overflow-y: auto;
-  margin-left: 0;
+  margin-left: 280px;
+  min-height: 100vh;
 }
 
 .main-expanded {
-  margin-left: 0;
+  margin-left: 60px;
 }
 
 /* Page Header */
