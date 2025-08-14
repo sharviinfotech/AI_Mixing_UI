@@ -1,0 +1,128 @@
+<div class="signup-container">
+  <div class="signup-card">
+    <div class="signup-header">
+      <div class="logo">
+        <img src="/sharvi-infotech-logo.jpg" alt="SHARVI INFOTECH" class="logo-image">
+      </div>
+      <h1>Create Account</h1>
+      <p>Join us to start managing your cotton mix planning</p>
+    </div>
+    
+    <form (ngSubmit)="onSignup($event)" class="signup-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input 
+            type="text" 
+            id="firstName" 
+            name="firstName" 
+            [(ngModel)]="firstName" 
+            placeholder="Enter your first name"
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input 
+            type="text" 
+            id="lastName" 
+            name="lastName" 
+            [(ngModel)]="lastName" 
+            placeholder="Enter your last name"
+            required
+          >
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          [(ngModel)]="email" 
+          placeholder="Enter your email address"
+          required
+        >
+      </div>
+      
+                   <div class="form-group">
+               <label for="companyName">Company Name</label>
+               <input 
+                 type="text" 
+                 id="companyName" 
+                 name="companyName" 
+                 [(ngModel)]="companyName" 
+                 placeholder="Enter your company name"
+                 required
+               >
+             </div>
+             
+             <div class="form-group">
+               <label for="photo">Profile Photo</label>
+               <div class="photo-upload">
+                 <input 
+                   type="file" 
+                   id="photo" 
+                   name="photo" 
+                   (change)="onPhotoSelected($event)"
+                   accept="image/*"
+                   class="photo-input"
+                 >
+                 <div class="photo-preview" *ngIf="photoPreview">
+                   <img [src]="photoPreview" alt="Profile Preview" class="preview-image">
+                 </div>
+                 <div class="photo-placeholder" *ngIf="!photoPreview">
+                   <span>📷</span>
+                   <p>Click to upload photo</p>
+                 </div>
+               </div>
+             </div>
+      
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+          type="text" 
+          id="username" 
+          name="username" 
+          [(ngModel)]="username" 
+          placeholder="Choose a username"
+          required
+        >
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            [(ngModel)]="password" 
+            placeholder="Create a password"
+            required
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input 
+            type="password" 
+            id="confirmPassword" 
+            name="confirmPassword" 
+            [(ngModel)]="confirmPassword" 
+            placeholder="Confirm your password"
+            required
+          >
+        </div>
+      </div>
+      
+      <button type="submit" class="signup-btn">Create Account</button>
+    </form>
+    
+    <div class="signup-footer">
+      <p>Already have an account? <a routerLink="/login">Sign in</a></p>
+    </div>
+  </div>
+</div>

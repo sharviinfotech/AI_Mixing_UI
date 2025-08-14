@@ -1,0 +1,257 @@
+<div class="page-container">
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.sidebar-closed]="!sidebarOpen">
+    <div class="sidebar-header">
+      <div class="logo">
+        <img src="/sharvi-infotech-logo.jpg" alt="SHARVI INFOTECH" class="logo-image">
+        <div class="logo-text">AI Mix Plan</div>
+      </div>
+      <button class="sidebar-toggle" (click)="toggleSidebar()">
+        <span class="toggle-icon">☰</span>
+      </button>
+    </div>
+
+               <!-- User Profile Section -->
+           <div class="user-profile">
+             <div class="user-avatar">
+               <img *ngIf="userPhoto" [src]="userPhoto" alt="User Photo" class="user-photo">
+               <div *ngIf="!userPhoto" class="avatar-placeholder">{{ userInitials }}</div>
+             </div>
+             <div class="user-info">
+               <div class="user-name">{{ userName }}</div>
+               <div class="user-role">{{ userRole }}</div>
+             </div>
+           </div>
+    
+    <nav class="sidebar-nav">
+      <a routerLink="/dashboard" class="nav-item">
+        <span class="nav-icon">📊</span>
+        <span class="nav-text">Dashboard</span>
+      </a>
+      <a routerLink="/bale-inventory" class="nav-item active">
+        <span class="nav-icon">📦</span>
+        <span class="nav-text">Bale Inventory</span>
+      </a>
+      <a routerLink="/ai-mix-planner" class="nav-item">
+        <span class="nav-icon">🤖</span>
+        <span class="nav-text">Cotton Mix</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="logout-btn" (click)="logout()">
+        <span class="nav-icon">🚪</span>
+        <span class="nav-text">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content" [class.main-expanded]="!sidebarOpen">
+    <header class="page-header">
+      <button class="mobile-toggle" (click)="toggleSidebar()">
+        <span class="toggle-icon">☰</span>
+      </button>
+      <h1>Bale Inventory Management</h1>
+      <div class="header-actions">
+        <button class="btn btn-primary">Add New Bale</button>
+        <button class="btn btn-secondary">Refresh</button>
+        <button class="btn btn-export">Export Data</button>
+      </div>
+    </header>
+
+    <div class="content-area">
+      <div class="table-container">
+        <div class="table-header">
+          <h2>Bale Inventory Data</h2>
+          <div class="table-actions">
+            <input type="text" class="search-input" placeholder="Search bales...">
+            <select class="filter-select">
+              <option value="">All Status</option>
+              <option value="available">Available</option>
+              <option value="transit">In Transit</option>
+              <option value="reserved">Reserved</option>
+            </select>
+          </div>
+        </div>
+        
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>S.NO</th>
+              <th>MATERIAL CODE</th>
+              <th>COUNT</th>
+              <th>QTY BALES</th>
+              <th>KG/BALE</th>
+              <th>KGS</th>
+              <th>VALUE</th>
+              <th>TRASH</th>
+              <th>MOISTURE</th>
+              <th>MIC</th>
+              <th>SCI</th>
+              <th>MAT</th>
+              <th>LEN</th>
+              <th>UNF</th>
+              <th>SFI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>S6</td>
+              <td>12</td>
+              <td>8</td>
+              <td>130/Bale</td>
+              <td>1300</td>
+              <td>1200</td>
+              <td>12</td>
+              <td>7</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>13</td>
+              <td>85</td>
+              <td>30</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>CAH</td>
+              <td>14</td>
+              <td>20</td>
+              <td>140/BALE</td>
+              <td>2800</td>
+              <td>3000</td>
+              <td>13</td>
+              <td>8</td>
+              <td>6</td>
+              <td>5</td>
+              <td>6</td>
+              <td>14</td>
+              <td>82</td>
+              <td>31</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>CMH</td>
+              <td>15</td>
+              <td>30</td>
+              <td>160/BALE</td>
+              <td>4800</td>
+              <td>3500</td>
+              <td>14</td>
+              <td>9</td>
+              <td>7</td>
+              <td>6</td>
+              <td>7</td>
+              <td>15</td>
+              <td>80</td>
+              <td>32</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>CTG</td>
+              <td>12</td>
+              <td>40</td>
+              <td>170/BALE</td>
+              <td>6800</td>
+              <td>4500</td>
+              <td>15</td>
+              <td>6</td>
+              <td>8</td>
+              <td>7</td>
+              <td>8</td>
+              <td>16</td>
+              <td>88</td>
+              <td>33</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>CAH</td>
+              <td>13</td>
+              <td>45</td>
+              <td>180/BALE</td>
+              <td>9000</td>
+              <td>5500</td>
+              <td>16</td>
+              <td>7</td>
+              <td>9</td>
+              <td>8</td>
+              <td>9</td>
+              <td>17</td>
+              <td>84</td>
+              <td>34</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>DCH</td>
+              <td>14</td>
+              <td>25</td>
+              <td>165/BALE</td>
+              <td>4125</td>
+              <td>4200</td>
+              <td>13</td>
+              <td>8</td>
+              <td>5</td>
+              <td>6</td>
+              <td>8</td>
+              <td>15</td>
+              <td>86</td>
+              <td>35</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>J34</td>
+              <td>15</td>
+              <td>35</td>
+              <td>155/BALE</td>
+              <td>5425</td>
+              <td>6100</td>
+              <td>12</td>
+              <td>7</td>
+              <td>6</td>
+              <td>7</td>
+              <td>9</td>
+              <td>16</td>
+              <td>87</td>
+              <td>36</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>NH</td>
+              <td>16</td>
+              <td>28</td>
+              <td>175/BALE</td>
+              <td>4900</td>
+              <td>5200</td>
+              <td>14</td>
+              <td>9</td>
+              <td>7</td>
+              <td>8</td>
+              <td>7</td>
+              <td>18</td>
+              <td>83</td>
+              <td>37</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>LRA</td>
+              <td>12</td>
+              <td>22</td>
+              <td>145/BALE</td>
+              <td>3190</td>
+              <td>3800</td>
+              <td>15</td>
+              <td>8</td>
+              <td>8</td>
+              <td>6</td>
+              <td>10</td>
+              <td>14</td>
+              <td>81</td>
+              <td>38</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>

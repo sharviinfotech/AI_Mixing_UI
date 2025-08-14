@@ -1,0 +1,204 @@
+<div class="page-container">
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.sidebar-closed]="!sidebarOpen">
+    <div class="sidebar-header">
+      <div class="logo">
+        <img src="/sharvi-infotech-logo.jpg" alt="SHARVI INFOTECH" class="logo-image">
+        <div class="logo-text">AI Mix Plan</div>
+      </div>
+      <button class="sidebar-toggle" (click)="toggleSidebar()">
+        <span class="toggle-icon">☰</span>
+      </button>
+    </div>
+
+               <!-- User Profile Section -->
+           <div class="user-profile">
+             <div class="user-avatar">
+               <img *ngIf="userPhoto" [src]="userPhoto" alt="User Photo" class="user-photo">
+               <div *ngIf="!userPhoto" class="avatar-placeholder">{{ userInitials }}</div>
+             </div>
+             <div class="user-info">
+               <div class="user-name">{{ userName }}</div>
+               <div class="user-role">{{ userRole }}</div>
+             </div>
+           </div>
+    
+    <nav class="sidebar-nav">
+      <a routerLink="/dashboard" class="nav-item">
+        <span class="nav-icon">📊</span>
+        <span class="nav-text">Dashboard</span>
+      </a>
+      <a routerLink="/bale-inventory" class="nav-item">
+        <span class="nav-icon">📦</span>
+        <span class="nav-text">Bale Inventory</span>
+      </a>
+      <a routerLink="/ai-mix-planner" class="nav-item active">
+        <span class="nav-icon">🤖</span>
+        <span class="nav-text">Cotton Mix</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="logout-btn" (click)="logout()">
+        <span class="nav-icon">🚪</span>
+        <span class="nav-text">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content" [class.main-expanded]="!sidebarOpen">
+    <header class="page-header">
+      <button class="mobile-toggle" (click)="toggleSidebar()">
+        <span class="toggle-icon">☰</span>
+      </button>
+      <h1>AI Cotton Mix Planner</h1>
+    </header>
+    <div class="content-area">
+      <!-- AI Mix Planner Form -->
+      <div class="mix-planner-form" *ngIf="!showMixOptions">
+        <div class="form-container">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="customerName">Customer Name</label>
+              <input 
+                type="text" 
+                id="customerName" 
+                [(ngModel)]="customerName" 
+                placeholder="Enter customer name"
+              >
+            </div>
+            <div class="form-group">
+              <label for="yarn">YARN</label>
+              <input 
+                type="text" 
+                id="yarn" 
+                [(ngModel)]="yarn" 
+                placeholder="Enter yarn quantity Per kg"
+              >
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="yarnCount">YARN-Count</label>
+              <input 
+                type="text" 
+                id="yarnCount" 
+                [(ngModel)]="yarnCount" 
+                placeholder="Enter yarn count"
+              >
+            </div>
+            <div class="form-group">
+              <label for="costPrice">Kg/Cost - Sales Price</label>
+              <input 
+                type="text" 
+                id="costPrice" 
+                [(ngModel)]="costPrice" 
+                placeholder="Enter cost Per kg"
+              >
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="waste">Waste</label>
+              <input 
+                type="text" 
+                id="waste" 
+                [(ngModel)]="waste" 
+                placeholder="Enter waste %"
+              >
+            </div>
+            <div class="form-group">
+              <label for="quality">Quality %</label>
+              <input 
+                type="text" 
+                id="quality" 
+                [(ngModel)]="quality" 
+                placeholder="Enter quality %"
+              >
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="rawCottonRequired">Raw Cotton Required</label>
+              <div class="display-field">{{ rawCottonRequired }}</div>
+            </div>
+            <div class="form-group">
+              <label for="yarnCost">Yarn Cost</label>
+              <div class="display-field">{{ yarnCost }}</div>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button class="ai-mix-btn" (click)="generateMix()">AI MixPlanner</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- AI Generated Mix Options Table -->
+      <div class="mix-options" *ngIf="showMixOptions">
+        <div class="table-container">
+          <h2>AI Generated Mix Options</h2>
+          <table class="mix-table">
+            <thead>
+              <tr>
+                <th class="option-col">Option</th>
+                <th class="mix-col">Mix Code</th>
+                <th class="cotton-col">Raw Cotton</th>
+                <th class="batch-col">Batch Num</th>
+                <th class="bales-col">No of Bales</th>
+                <th class="weight-col">Total Weight (kg)</th>
+                <th class="cost-col">Total Bale Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Opt-01</td>
+                <td>MIXCODE12CS6</td>
+                <td>S6</td>
+                <td>B1</td>
+                <td>2</td>
+                <td>260</td>
+                <td>₹240</td>
+              </tr>
+              <tr>
+                <td>Opt-01</td>
+                <td>MIXCODE12CCMH</td>
+                <td>CMH</td>
+                <td>B2</td>
+                <td>5</td>
+                <td>800</td>
+                <td>₹750</td>
+              </tr>
+              <tr>
+                <td>Opt-02</td>
+                <td>MIXCODE15CS6</td>
+                <td>S6</td>
+                <td>B3</td>
+                <td>3</td>
+                <td>390</td>
+                <td>₹360</td>
+              </tr>
+              <tr>
+                <td>Opt-02</td>
+                <td>MIXCODE15CDCH</td>
+                <td>DCH</td>
+                <td>B4</td>
+                <td>4</td>
+                <td>520</td>
+                <td>₹480</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="table-actions">
+            <button class="btn btn-secondary" (click)="backToForm()">Back to Form</button>
+            <button class="btn btn-primary">Save Mix</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

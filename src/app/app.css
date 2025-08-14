@@ -1,0 +1,34 @@
+/* Main Content Styles */
+.main-content {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #000000;
+  box-sizing: border-box;
+}
+
+/* Ensure body and html also take full width */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background: #000000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main-content {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    width: 100%;
+    padding: 0;
+  }
+}
