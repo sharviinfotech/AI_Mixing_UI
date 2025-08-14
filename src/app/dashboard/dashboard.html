@@ -11,17 +11,17 @@
       </button>
     </div>
 
-               <!-- User Profile Section -->
-           <div class="user-profile">
-             <div class="user-avatar">
-               <img *ngIf="userPhoto" [src]="userPhoto" alt="User Photo" class="user-photo">
-               <div *ngIf="!userPhoto" class="avatar-placeholder">{{ userInitials }}</div>
-             </div>
-             <div class="user-info">
-               <div class="user-name">{{ userName }}</div>
-               <div class="user-role">{{ userRole }}</div>
-             </div>
-           </div>
+    <!-- User Profile Section -->
+    <div class="user-profile">
+      <div class="user-avatar">
+        <img *ngIf="userPhoto" [src]="userPhoto" alt="User Photo" class="user-photo">
+        <div *ngIf="!userPhoto" class="avatar-placeholder">{{ userInitials }}</div>
+      </div>
+      <div class="user-info">
+        <div class="user-name">{{ userName }}</div>
+        <div class="user-role">{{ userRole }}</div>
+      </div>
+    </div>
     
     <nav class="sidebar-nav">
       <a routerLink="/dashboard" class="nav-item active">
@@ -47,104 +47,144 @@
   </aside>
 
   <!-- Main Content -->
-  <main class="main-content" [class.main-expanded]="!sidebarOpen">
-    <header class="page-header">
-      <button class="mobile-toggle" (click)="toggleSidebar()">
-        <span class="toggle-icon">☰</span>
-      </button>
+  <div class="main-content" [class.main-expanded]="!sidebarOpen">
+    <!-- Page Header -->
+    <div class="page-header">
       <div class="header-content">
         <h1>Dashboard</h1>
-        <p>Welcome back! Here's what's happening with your cotton mix planning.</p>
+        <p>Welcome back, {{ userName }}! Here's your cotton mix planning overview.</p>
       </div>
-    </header>
-    
-    <div class="content-area">
-      <!-- Stats Cards -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-icon">📦</div>
-          <div class="stat-content">
-            <h3>Total Bales</h3>
-            <p class="stat-number">1,247</p>
-            <p class="stat-change positive">+12% from last month</p>
-          </div>
+      <button class="sidebar-toggle" (click)="toggleSidebar()">
+        <span class="toggle-icon">☰</span>
+      </button>
+    </div>
+
+    <!-- Charts Grid - Moved to top -->
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>Daily Sales</h3>
+        <div class="chart-container">
+          <canvas #dailySalesChart width="400" height="300"></canvas>
         </div>
-        
-        <div class="stat-card">
-          <div class="stat-icon">⚖️</div>
-          <div class="stat-content">
-            <h3>Total Weight</h3>
-            <p class="stat-number">2,847 kg</p>
-            <p class="stat-change positive">+8% from last month</p>
-          </div>
+      </div>
+      
+      <div class="chart-card">
+        <h3>Global Referrals</h3>
+        <div class="chart-container">
+          <canvas #globalReferralsChart width="400" height="300"></canvas>
         </div>
-        
-        <div class="stat-card">
-          <div class="stat-icon">🎯</div>
-          <div class="stat-content">
-            <h3>Mix Plans</h3>
-            <p class="stat-number">23</p>
-            <p class="stat-change positive">+5 new this week</p>
-          </div>
+      </div>
+      
+      <div class="chart-card">
+        <h3>Completed Tasks</h3>
+        <div class="chart-container">
+          <canvas #completedTasksChart width="400" height="300"></canvas>
         </div>
-        
-        <div class="stat-card">
-          <div class="stat-icon">✅</div>
-          <div class="stat-content">
-            <h3>Completed</h3>
-            <p class="stat-number">18</p>
-            <p class="stat-change positive">78% success rate</p>
+      </div>
+    </div>
+
+    <!-- Additional Charts -->
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>Quality Trend</h3>
+        <div class="chart-container">
+          <canvas #qualityTrendChart width="400" height="300"></canvas>
+        </div>
+      </div>
+      
+      <div class="chart-card">
+        <h3>Production Efficiency</h3>
+        <div class="chart-container">
+          <canvas #productionEfficiencyChart width="400" height="300"></canvas>
+        </div>
+      </div>
+      
+      <div class="chart-card">
+        <h3>Inventory Levels</h3>
+        <div class="chart-container">
+          <canvas #inventoryLevelsChart width="400" height="300"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Statistics Grid - Moved below charts -->
+    <div class="stats-grid" *ngIf="stats">
+      <div class="stat-card">
+        <div class="stat-icon">📦</div>
+        <div class="stat-content">
+          <h3>Total Bales</h3>
+          <div class="stat-number">{{ stats.totalBales.toLocaleString() }}</div>
+          <div class="stat-change">+{{ stats.monthlyGrowth }}% from last month</div>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">⚖️</div>
+        <div class="stat-content">
+          <h3>Total Weight</h3>
+          <div class="stat-number">{{ stats.totalWeight.toLocaleString() }} kg</div>
+          <div class="stat-change">+{{ stats.monthlyGrowth }}% from last month</div>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">🤖</div>
+        <div class="stat-content">
+          <h3>Mix Plans</h3>
+          <div class="stat-number">{{ stats.mixPlans }}</div>
+          <div class="stat-change">{{ stats.pendingPlans }} pending</div>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <div class="stat-content">
+          <h3>Success Rate</h3>
+          <div class="stat-number">{{ getSuccessRate() }}%</div>
+          <div class="stat-change">Based on {{ stats.completedPlans }} plans</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Management Grid -->
+    <div class="management-grid">
+      <!-- Quick Actions -->
+      <div class="management-card">
+        <h2>Quick Actions</h2>
+        <div class="actions-grid">
+          <div 
+            class="action-btn" 
+            *ngFor="let action of quickActions"
+            [style.background]="action.color"
+            (click)="navigateToAction(action)"
+          >
+            <div class="action-icon">{{ action.icon }}</div>
+            <div class="action-content">
+              <div class="action-title">{{ action.title }}</div>
+              <div class="action-description">{{ action.description }}</div>
+            </div>
           </div>
         </div>
       </div>
       
-      <!-- Management Cards -->
-      <div class="management-grid">
-        <div class="management-card">
-          <h3>Quick Actions</h3>
-          <div class="action-buttons">
-            <button class="action-btn primary">
-              <span>📦</span>
-              Add New Bale
-            </button>
-            <button class="action-btn secondary">
-              <span>🤖</span>
-              Create Mix Plan
-            </button>
-            <button class="action-btn secondary">
-              <span>📊</span>
-              View Reports
-            </button>
-          </div>
-        </div>
-        
-        <div class="management-card">
-          <h3>Recent Activity</h3>
-          <div class="activity-list">
-            <div class="activity-item">
-              <span class="activity-icon">📦</span>
-              <div class="activity-content">
-                <p>New bale added - Grade A Cotton</p>
-                <small>2 hours ago</small>
-              </div>
-            </div>
-            <div class="activity-item">
-              <span class="activity-icon">🤖</span>
-              <div class="activity-content">
-                <p>AI Mix Plan completed</p>
-                <small>4 hours ago</small>
-              </div>
-            </div>
-            <div class="activity-item">
-              <span class="activity-icon">✅</span>
-              <div class="activity-content">
-                <p>Quality check passed</p>
-                <small>6 hours ago</small>
-              </div>
+      <!-- Recent Activities -->
+      <div class="management-card">
+        <h2>Recent Activities</h2>
+        <div class="activities-list">
+          <div 
+            class="activity-item" 
+            *ngFor="let activity of activities"
+            [class]="'activity-' + activity.type"
+          >
+            <div class="activity-icon">{{ activity.icon }}</div>
+            <div class="activity-content">
+              <div class="activity-title">{{ activity.title }}</div>
+              <div class="activity-description">{{ activity.description }}</div>
+              <div class="activity-time">{{ getTimeAgo(activity.timestamp) }}</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </main>
+  </div>
 </div>
